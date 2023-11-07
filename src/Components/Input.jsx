@@ -3,7 +3,7 @@ import findInputError from "../utils/findInputError";
 import isFormInvalid from "../utils/isFormInvalid";
 import { TextField } from "@mui/material";
 
-export const Input = ({ label, type, id, placeholder }) => {
+export const Input = ({ label, type, id, placeholder, value }) => {
   const {
     register,
     formState: { errors },
@@ -21,6 +21,8 @@ export const Input = ({ label, type, id, placeholder }) => {
         id={id}
         type={type}
         placeholder={placeholder}
+        fullWidth
+        defaultValue={value}
         {...register(label, {
           required: {
             value: true,
@@ -39,5 +41,5 @@ export const Input = ({ label, type, id, placeholder }) => {
 };
 
 const InputError = ({ message }) => {
-  return <p>{message}</p>;
+  return <p className="errorMsg"> {message}</p>;
 };

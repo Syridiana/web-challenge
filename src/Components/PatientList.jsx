@@ -6,10 +6,14 @@ import Form from "./Form.jsx";
 
 const PatientList = () => {
   const [patients, setPatients] = useState([]);
-  const [modal, setModal] = useState([false]);
+  const [modal, setModal] = useState(false);
 
   const emitData = (data) => {
     setPatients([data, ...patients]);
+  };
+
+  const emitModal = () => {
+    setModal(false);
   };
 
   useEffect(() => {
@@ -18,18 +22,20 @@ const PatientList = () => {
 
   return (
     <div className="patient-list">
-      <Form modal={modal} emitData={emitData} />
-      <button
-        onClick={() => {
-          setModal(!modal);
-        }}
-      >
-        {" "}
-        show Modal{" "}
-      </button>
       <div className="list-wrapper">
         <div className="addCard patient-card">
-          <AddCircleOutlineIcon sx={{ fontSize: 40 }} />
+          {!modal ? (
+            <button
+              className="addBtn"
+              onClick={() => {
+                setModal(!modal);
+              }}
+            >
+              <AddCircleOutlineIcon sx={{ fontSize: 40 }} />
+            </button>
+          ) : (
+            <Form modal={modal} emitData={emitData} emitModal={emitModal} />
+          )}
         </div>
         {!patients ? (
           <h1>No Patients Found</h1>

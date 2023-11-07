@@ -1,10 +1,8 @@
-import React from "react";
 import { Input } from "./Input";
-/* import { Controller, FormProvider, useFormContext } from "react-hook-form";
-import { TextField } from "@mui/material"; */
 import { useForm, FormProvider } from "react-hook-form";
+import { Button } from "@mui/material";
 
-const Form = ({ emitData }) => {
+const Form = ({ emitData, emitModal, patient }) => {
   const methods = useForm();
 
   const onSubmit = methods.handleSubmit((data) => {
@@ -12,66 +10,53 @@ const Form = ({ emitData }) => {
     emitData(data);
   });
 
-  /*   const [requestParams, setRequestParams] = useState({
-    name: "",
-    description: "",
-    avatar: "",
-  }); */
-
-  /*   const [name, setName] = useState("");
-  const [nameErr, setNameErr] = useState("");
-  const [description, setDescription] = useState("");
-  const [descriptionErr, setDescriptionErr] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [avatarErr, setAvatarErr] = useState(""); */
-  /*   const { controlName, controlDescription, controlAvatar } = useFormContext(); */
+  const onCancel = () => {
+    emitModal(false);
+  };
 
   return (
-    /*     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const obj = {
-          name: formData.get("name") ?? "",
-          description: formData.get("description") ?? "",
-          avatar: formData.get("avatar") ?? "",
-          id: crypto.randomUUID(),
-        };
-        emitData(obj);
-      }}
-    > */
     <FormProvider {...methods}>
       <form
         onSubmit={(e) => e.preventDefault()}
         noValidate
         className="container"
       >
-        <Input
-          label="Name"
-          id="name"
-          name="name"
-          type="text"
-          placeholder="Name"
-        />
+        <div className="formGroup">
+          <Input
+            label="name"
+            id="name"
+            name="name"
+            type="text"
+            placeholder=""
+            value={patient?.name}
+          />
+
+          <Input
+            label="avatar"
+            id="avatar"
+            name="avatar"
+            type="avatar"
+            placeholder=""
+            value={patient?.avatar}
+          />
+        </div>
 
         <Input
-          label="Description"
+          label="description"
           id="description"
           name="description"
           type="text"
-          placeholder="Description"
+          placeholder=""
           className="descriptionBox"
+          value={patient?.description}
         />
-
-        <Input
-          label="Avatar"
-          id="avatar"
-          name="avatar"
-          type="avatar"
-          placeholder="Avatar"
-        />
-
-        <button onClick={onSubmit}>Submit</button>
+        <br />
+        <Button onClick={onSubmit} variant="contained">
+          Submit
+        </Button>
+        <Button onClick={onCancel} variant="contained">
+          Cancel
+        </Button>
       </form>
     </FormProvider>
   );

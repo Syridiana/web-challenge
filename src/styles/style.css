@@ -61,12 +61,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 264px;
+    min-height: 283px;
+  }
+
+  .addBtn{
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    border-radius: 80px;
+    border: none;
   }
 
   .name {
     padding: 20px;
     font-size: 20px;
+  }
+
+  .formGroup{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .descriptionBox{
+    width: 100%;
   }
 
   .textbtn{
@@ -100,6 +119,13 @@
     flex-direction: row;
     margin-top: 15px;
   }
+
+  .errorMsg{
+    font-size: 11px!important;
+    margin: 2px 2px!important;
+    color: maroon;
+  }
+
   
   .search-params form {
     border-radius: 6px;
@@ -449,3 +475,5 @@
   .mini .loader {
     font-size: 34px;
   }
+
+  
