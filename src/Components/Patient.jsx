@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EditIcon from '@mui/icons-material/Edit';
 
 const Patient = ({name, description, avatar}) => {
 
@@ -30,7 +31,7 @@ const Patient = ({name, description, avatar}) => {
                 <button className="textbtn" onClick={showFullDescriptionHandler}>
                     Read {showFullDescription ? "Less" : "More"}
                 </button>
-                <button className="customBtn">+</button>
+                <button className="customBtn"><EditIcon sx={{ fontSize: 20}}/></button>
                 </div>
         </div>
     )
