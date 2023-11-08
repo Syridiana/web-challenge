@@ -28,6 +28,7 @@ export const Input = ({ label, type, id, placeholder, value }) => {
             value: true,
             message: "required",
           },
+          minLength: { value: 3, message: "Can't be that short" },
         })}
       />
       {isInvalid && (

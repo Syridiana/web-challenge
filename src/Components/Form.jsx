@@ -1,9 +1,23 @@
 import { Input } from "./Input";
 import { useForm, FormProvider } from "react-hook-form";
 import { Button } from "@mui/material";
+import { gsap } from "gsap";
+import { useRef, useEffect } from "react";
 
 const Form = ({ emitData, emitModal, patient }) => {
   const methods = useForm();
+
+  const formRef = useRef();
+
+  useEffect(() => {
+    // -- ANIMATION CODE HERE --
+    gsap.from(formRef.current, {
+      y: -10,
+      opacity: 0,
+      duration: 0.5,
+      ease: "power1.out",
+    });
+  }, []);
 
   const onSubmit = methods.handleSubmit((data) => {
     data.id = crypto.randomUUID();
@@ -20,6 +34,7 @@ const Form = ({ emitData, emitModal, patient }) => {
         onSubmit={(e) => e.preventDefault()}
         noValidate
         className="container"
+        ref={formRef}
       >
         <div className="formGroup">
           <Input
@@ -36,11 +51,10 @@ const Form = ({ emitData, emitModal, patient }) => {
             id="avatar"
             name="avatar"
             type="avatar"
-            placeholder=""
+            placeholder="avatar URL"
             value={patient?.avatar}
           />
         </div>
-
         <Input
           label="description"
           id="description"
@@ -54,7 +68,8 @@ const Form = ({ emitData, emitModal, patient }) => {
         <Button onClick={onSubmit} variant="contained">
           Submit
         </Button>
-        <Button onClick={onCancel} variant="contained">
+        &nbsp;&nbsp;
+        <Button onClick={onCancel} variant="contained" color="error">
           Cancel
         </Button>
       </form>
