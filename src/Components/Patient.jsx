@@ -4,6 +4,14 @@ import Form from "./Form";
 import { motion } from "framer-motion";
 
 const Patient = ({ name, description, avatar, id }) => {
+  const [isImageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = avatar;
+    img.onload = () => setImageLoaded(true);
+  }, []);
+
   const [showFullDescription, setFullDescription] = useState(false);
   const [modal, setModal] = useState(false);
 
@@ -51,14 +59,18 @@ const Patient = ({ name, description, avatar, id }) => {
       {!modal ? (
         <div>
           <div className="identity-wrapper">
-            <img
-              src={hero}
-              alt={patient.name}
-              onError={(e) => {
-                e.target.src =
-                  "https://hwchamber.co.uk/wp-content/uploads/2022/04/avatar-placeholder.gif";
-              }}
-            />
+            {isImageLoaded ? (
+              <img
+                src={hero}
+                alt={patient.name}
+                onError={(e) => {
+                  e.target.src =
+                    "https://hwchamber.co.uk/wp-content/uploads/2022/04/avatar-placeholder.gif";
+                }}
+              />
+            ) : (
+              <div>Loading...</div>
+            )}
             <h3 className="name">{patient.name}</h3>
           </div>
           <p>{desc}</p>
