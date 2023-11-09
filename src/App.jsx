@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div>
       <h2 id="title">Patient List</h2>
-      <BrowserRouter basename="/web-challenge">
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<PatientList />} />
         </Routes>
