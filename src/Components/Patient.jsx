@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import Form from "./Form";
-import { gsap } from "gsap";
 import { motion } from "framer-motion";
 
 const Patient = ({ name, description, avatar, id }) => {
@@ -13,18 +12,6 @@ const Patient = ({ name, description, avatar, id }) => {
     description: description,
     avatar: avatar,
   });
-
-  const patientCardRef = useRef();
-
-  useEffect(() => {
-    gsap.from(patientCardRef.current, {
-      y: -20,
-      opacity: 0,
-      delay: 0.075 * id,
-      duration: 0.5,
-      ease: "power1.out",
-    });
-  }, []);
 
   const emitData = (data) => {
     setPatient(data);
@@ -51,10 +38,15 @@ const Patient = ({ name, description, avatar, id }) => {
 
   return (
     <motion.div
-      className="patient-card"
-      ref={patientCardRef}
-      transition={{ duration: 0.2 }}
+      className="patient-card patient"
+      transition={{ duration: 0.2, ease: "easeOut" }}
       layout
+      initial={{ y: -20, opacity: 0 }}
+      animate={{
+        y: 0,
+        opacity: 1,
+        transition: { ease: "easeOut", duration: 0.2, delay: 0.05 * id },
+      }}
     >
       {!modal ? (
         <div>

@@ -10,7 +10,6 @@ const Form = ({ emitData, emitModal, patient }) => {
   const formRef = useRef();
 
   useEffect(() => {
-    // -- ANIMATION CODE HERE --
     gsap.from(formRef.current, {
       y: -10,
       opacity: 0,
